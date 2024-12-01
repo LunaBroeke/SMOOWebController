@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Net;
 using System.Net.Sockets;
 using Newtonsoft.Json;
 
@@ -85,23 +86,13 @@ namespace SMOOWebController.Backend
 			string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 			Console.WriteLine($"[{time}]{message}");
 		}
-		public static string RequestRawJson(string address, int port, string token)
+		private string SendRequestToServer(APIRequest request)
 		{
-			if (address == string.Empty) { Log("Address missing"); return string.Empty; }
-			if (port == 0) { Log("Port missing"); return string.Empty; }
-			if (token == string.Empty) { Log("Token missing"); return string.Empty; }
-			RequestRoot root = new RequestRoot()
-			{
-				API_JSON_REQUEST = new APIRequest()
-				{
-					Token = token
-				}
-			};
-			string json = JsonConvert.SerializeObject(root);
-			Log(json);
+			RequestRoot r = new RequestRoot() { API_JSON_REQUEST = request };
+			string json = JsonConvert.SerializeObject(r);
 			string response = string.Empty;
 			int attempt = 0;
-				while (attempt < 10)
+			do
 			{
 				try
 				{
@@ -109,7 +100,7 @@ namespace SMOOWebController.Backend
 					{
 						client.ReceiveTimeout = 500;
 						client.SendTimeout = 500;
-						var result = client.BeginConnect(address, port, null, null);
+						var result = client.BeginConnect(settings.address, settings.port, null, null);
 						bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2));
 						if (!success)
 						{
@@ -128,62 +119,30 @@ namespace SMOOWebController.Backend
 				}
 				catch
 				{
-					Log($"failed calling {address}:{port}");
+					Log($"failed calling {settings.address}:{settings.port}");
 					attempt++;
 				}
 			}
-			return "";
+			while (attempt < 10);
+			return "Failed";
 		}
-		public static Root RequestData(string address, int port, string token)
+		public Root RequestData()
 		{
-			if (address == string.Empty) { Log("Address missing"); return null; }
-			if (port == 0) { Log("Port missing"); return null; }
-			if (token == string.Empty) { Log("Token missing"); return null; }
-			RequestRoot root = new RequestRoot()
+			APIRequest request = new APIRequest()
 			{
-				API_JSON_REQUEST = new APIRequest()
-				{
-					Token = token
-				}
+				Token = settings.token,
 			};
-			string json = JsonConvert.SerializeObject(root);
-			Log(json);
-			string response = string.Empty;
-			int attempt = 0;
-			while (attempt < 10)
+			return JsonConvert.DeserializeObject<Root>(SendRequestToServer(request));
+		}
+		public string SendCommand(string command)
+		{
+			APIRequest request = new APIRequest()
 			{
-				try
-				{
-					using (var client = new TcpClient())
-					{
-						client.ReceiveTimeout = 500;
-						client.SendTimeout = 500;
-						var result = client.BeginConnect(address, port, null, null);
-						bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2));
-						if (!success)
-						{
-							throw new SocketException();
-						}
-						using (var stream = client.GetStream())
-						using (var writer = new StreamWriter(stream))
-						using (var reader = new StreamReader(stream))
-						{
-							writer.Write(json);
-							writer.Flush();
-							response = reader.ReadToEnd();
-							return JsonConvert.DeserializeObject<Root>(response);
-						}
-					}
-				}
-				catch
-				{
-					Log($"failed calling {address}:{port}");
-					attempt++;
-
-				}
-			}
-			Log("Too many attempts");
-			return null;
+				Token = settings.token,
+				Type = "Command",
+				Data = command
+			};
+			return SendRequestToServer(request);
 		}
 
 		private class RequestRoot
