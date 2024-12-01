@@ -28,6 +28,7 @@ namespace SMOOWebController
 
 			app.MapRazorPages();
 
+			Backend.JsonAPI.Log(Backend.JsonAPI.RequestData("127.0.0.1", 1027, "ADMINCELESTIAADMIN").Settings.Scenario.MergeEnabled.ToString());
 			app.Run();
 		}
 	}
