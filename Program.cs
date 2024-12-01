@@ -28,6 +28,7 @@ namespace SMOOWebController
 
 			app.MapRazorPages();
 
+			Backend.JsonAPI.Log(new Backend.JsonAPI().SendCommand("sendall cap"));
 			app.Run();
 		}
 	}
