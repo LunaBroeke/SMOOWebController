@@ -27,8 +27,10 @@ namespace SMOOWebController
 			app.UseAuthorization();
 
 			app.MapRazorPages();
+			Backend.JsonAPI apiDebug = new Backend.JsonAPI();
+			Backend.JsonAPI.Log(apiDebug.SendCommand("help"));
+			Backend.JsonAPI.Log(apiDebug.GetPermissions());
 
-			Backend.JsonAPI.Log(new Backend.JsonAPI().SendCommand("sendall cap"));
 			app.Run();
 		}
 	}

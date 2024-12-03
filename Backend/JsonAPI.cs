@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace SMOOWebController.Backend
@@ -81,11 +82,20 @@ namespace SMOOWebController.Backend
 	public class JsonAPI
 	{
 		public Settings settings = Settings.LoadSettings();
+		/// <summary>
+		/// Sends a debug log message, will probably move to its own script later.
+		/// </summary>
+		/// <param name="message"></param>
 		public static void Log(string message)
 		{
 			string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 			Console.WriteLine($"[{time}]{message}");
 		}
+		/// <summary>
+		/// General Request Sender to the server using the JsonAPI objects settings.token.
+		/// </summary>
+		/// <param name="request">The API_JSON_REQUEST object detailing if its a Status or a Command request and its command</param>
+		/// <returns>Full Json string returned by the request</returns>
 		private string SendRequestToServer(APIRequest request)
 		{
 			RequestRoot r = new RequestRoot() { API_JSON_REQUEST = request };
@@ -126,6 +136,10 @@ namespace SMOOWebController.Backend
 			while (attempt < 10);
 			return "Failed";
 		}
+		/// <summary>
+		/// Requests for the full root of the "Status" type.
+		/// </summary>
+		/// <returns>Full Status Root</returns>
 		public Root RequestData()
 		{
 			APIRequest request = new APIRequest()
@@ -134,6 +148,11 @@ namespace SMOOWebController.Backend
 			};
 			return JsonConvert.DeserializeObject<Root>(SendRequestToServer(request));
 		}
+		/// <summary>
+		/// Requests to send a command to the server.
+		/// </summary>
+		/// <param name="command">SMOO server command</param>
+		/// <returns>full string that gets returned by the server</returns>
 		public string SendCommand(string command)
 		{
 			APIRequest request = new APIRequest()
@@ -143,6 +162,26 @@ namespace SMOOWebController.Backend
 				Data = command
 			};
 			return SendRequestToServer(request);
+		}
+		/// <summary>
+		/// Gets the API tokens current permissions
+		/// </summary>
+		/// <returns>List of permissions</returns>
+		public string GetPermissions()
+		{
+			APIRequest request = new APIRequest()
+			{
+				Token = settings.token,
+				Type = "Permissions"
+			};
+			string s = SendRequestToServer(request);
+			var result = JsonConvert.DeserializeObject<dynamic>(s);
+			StringBuilder sb = new StringBuilder();
+			foreach (string item in result.Permissions) 
+			{
+				sb.AppendLine(item);
+			}
+			return sb.ToString();
 		}
 
 		private class RequestRoot
