@@ -29,8 +29,10 @@ namespace SMOOWebController
 
 			app.MapRazorPages();
 			Backend.JsonAPI apiDebug = new Backend.JsonAPI();
+			Thread manualCommands = new Thread(() => { while (true) { logger.Log(apiDebug.SendCommand(Console.ReadLine())); } }) { IsBackground = true };
 			logger.Log(apiDebug.SendCommand("help"));
 			logger.Log(apiDebug.GetPermissions());
+			manualCommands.Start();
 
 			app.Run();
 		}
