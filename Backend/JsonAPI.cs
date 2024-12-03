@@ -82,15 +82,7 @@ namespace SMOOWebController.Backend
 	public class JsonAPI
 	{
 		public Settings settings = Settings.LoadSettings();
-		/// <summary>
-		/// Sends a debug log message, will probably move to its own script later.
-		/// </summary>
-		/// <param name="message"></param>
-		public static void Log(string message)
-		{
-			string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-			Console.WriteLine($"[{time}]{message}");
-		}
+		private Logger logger = new Logger() { name = "JsonAPI"};
 		/// <summary>
 		/// General Request Sender to the server using the JsonAPI objects settings.token.
 		/// </summary>
@@ -110,7 +102,7 @@ namespace SMOOWebController.Backend
 					{
 						client.ReceiveTimeout = 500;
 						client.SendTimeout = 500;
-						var result = client.BeginConnect(settings.address, settings.port, null, null);
+						var result = client.BeginConnect(settings.smooServer.Address, settings.smooServer.Port, null, null);
 						bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2));
 						if (!success)
 						{
@@ -129,7 +121,7 @@ namespace SMOOWebController.Backend
 				}
 				catch
 				{
-					Log($"failed calling {settings.address}:{settings.port}");
+					logger.Log($"failed calling {settings.smooServer.Address}:{settings.smooServer.Address}");
 					attempt++;
 				}
 			}

@@ -2,6 +2,7 @@ namespace SMOOWebController
 {
 	public class Program
 	{
+		public static Logger logger = new Logger() { name = "console" };
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
@@ -28,8 +29,8 @@ namespace SMOOWebController
 
 			app.MapRazorPages();
 			Backend.JsonAPI apiDebug = new Backend.JsonAPI();
-			Backend.JsonAPI.Log(apiDebug.SendCommand("help"));
-			Backend.JsonAPI.Log(apiDebug.GetPermissions());
+			logger.Log(apiDebug.SendCommand("help"));
+			logger.Log(apiDebug.GetPermissions());
 
 			app.Run();
 		}
