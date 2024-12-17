@@ -9,7 +9,6 @@ namespace SMOOWebController.Backend
 		public StartButton startButton = new StartButton();
 		public LogListener logListener = new LogListener();
 		private const string path = "websettings.json";
-		[JsonIgnore] public string token = "localtoken"; //SMOO Server JsonAPI token
 		/// <summary>
 		/// Settings for connecting to the Super Mario Odyssey Online Server
 		/// </summary>
@@ -74,7 +73,6 @@ namespace SMOOWebController.Backend
 			}
 			//settings.address = settings.smooServer.Address;
 			//settings.port = settings.smooServer.port;
-			settings.token = GetToken(settings);
 			settings.SaveSettings();
 			return settings;
 		}

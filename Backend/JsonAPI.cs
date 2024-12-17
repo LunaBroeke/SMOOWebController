@@ -83,6 +83,11 @@ namespace SMOOWebController.Backend
 	{
 		public Settings settings = Settings.LoadSettings();
 		private Logger logger = new Logger() { name = "JsonAPI"};
+		public readonly string token;
+		public JsonAPI(string token) 
+		{
+			this.token = token;
+		}
 		/// <summary>
 		/// General Request Sender to the server using the JsonAPI objects settings.token.
 		/// </summary>
@@ -136,7 +141,7 @@ namespace SMOOWebController.Backend
 		{
 			APIRequest request = new APIRequest()
 			{
-				Token = settings.token,
+				Token = token
 			};
 			return JsonConvert.DeserializeObject<Root>(SendRequestToServer(request));
 		}
@@ -149,7 +154,7 @@ namespace SMOOWebController.Backend
 		{
 			APIRequest request = new APIRequest()
 			{
-				Token = settings.token,
+				Token = token,
 				Type = "Command",
 				Data = command
 			};
@@ -163,7 +168,7 @@ namespace SMOOWebController.Backend
 		{
 			APIRequest request = new APIRequest()
 			{
-				Token = settings.token,
+				Token = token,
 				Type = "Permissions"
 			};
 			string s = SendRequestToServer(request);
