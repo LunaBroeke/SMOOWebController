@@ -4,10 +4,12 @@ namespace SMOOWebController.Backend
 {
 	public class Settings
 	{
+		public static Settings Instance = LoadSettings();
 		public SMOOServer smooServer = new SMOOServer();
 		public TokenSettings tokenSettings = new TokenSettings();
 		public StartButton startButton = new StartButton();
 		public LogListener logListener = new LogListener();
+		public HTTPSender httpSender = new HTTPSender();
 		private const string path = "websettings.json";
 		/// <summary>
 		/// Settings for connecting to the Super Mario Odyssey Online Server
@@ -52,6 +54,13 @@ namespace SMOOWebController.Backend
 			public string Name = "Luwuna"; //This doesn't need to be applied in code. This is just for organization
 			public ulong DiscordUserID = 628251183420801026; //Discord User ID. Default is set to me, so if you don't want me to have access; best you remove this example.
 			public string Token = "localtoken"; //User specific token.
+		}
+		/// <summary>
+		/// Listening address for sending HTTP Request.
+		/// </summary>
+		public class HTTPSender
+		{
+			public string address = "http://127.0.0.1:5170/";
 		}
 		/// <summary>
 		/// Function that loads the settings, this is only supposed to be called ONCE in JsonAPI.cs

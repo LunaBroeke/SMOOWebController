@@ -1,8 +1,9 @@
-﻿@page
-@model IndexModel
+@page
+@using SMOOWebController.Backend
 @{
-    ViewData["Title"] = "Home page";
+
 }
+
 
 <style>
     /* General Reset */
@@ -179,38 +180,129 @@
 </style>
 
 
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMOO Server</title>
+    <title>SMOO Server | ~/images</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<script>
+    var localAddress = '@StaticStrings.GetLocalAddress()'
+</script>
+
 <body>
     <div class="container">
         <!-- Top Text -->
         <div class="top-text">
-            <h1>SMOO Server V0</h1>
+            <h1>Send All Players to a Different Kingdom</h1>
         </div>
 
         <!-- Buttons Section -->
         <div class="button-section">
             <div class="button-container">
                 <p class="button-label">Mushroom</p>
-                <div class="button">
-                    <img src="~/images/icon1.png" alt="Button 1" />
+                <div class="button" onclick="sendKingdom('mush')">
+                    <img src="~/images/icon1.png" alt="Button 1">
                 </div>
             </div>
             <div class="button-container">
-                <p class="button-label">Ban</p>
-                <div class="button"
-onclick="window.location.href='ban';">
-                    <img src="~/images/ban.png" alt="Button 2" />
+                <p class="button-label">Cap</p>
+                <div class="button" onclick="sendKingdom('cap')">
+                    <img src="~/images/icon2.png" alt="Button 2">
                 </div>
             </div>
             <div class="button-container">
-                <p class="button-label">Send All</p>
-                <div class="button" onclick="window.location.href='sendall';">
-                    <img src="~/images/sendall.png" alt="Button 3" />
+                <p class="button-label">Cascade</p>
+                <div class="button" onclick="sendKingdom('cascade')">
+                    <img src="~/images/icon3.png" alt="Button 3">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Sand</p>
+                <div class="button" onclick="sendKingdom('sand')">
+                    <img src="~/images/icon4.png" alt="Button 4">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Lake</p>
+                <div class="button" onclick="sendKingdom('lake')">
+                    <img src="~/images/icon5.png" alt="Button 5">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Wooded</p>
+                <div class="button" onclick="sendKingdom('wooded')">
+                    <img src="~/images/icon6.png" alt="Button 6">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Cloud</p>
+                <div class="button" onclick="sendKingdom('cloud')">
+                    <img src="~/images/icon7.png" alt="Button 7">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Lost</p>
+                <div class="button" onclick="sendKingdom('lost')">
+                    <img src="~/images/icon8.png" alt="Button 8">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Metro</p>
+                <div class="button" onclick="sendKingdom('metro')">
+                    <img src="~/images/icon9.png" alt="Button 9">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Snow</p>
+                <div class="button" onclick="sendKingdom('snow')">
+                    <img src="~/images/icon10.png" alt="Button 10">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Seaside</p>
+                <div class="button" onclick="sendKingdom('sea')">
+                    <img src="~/images/icon11.png" alt="Button 11">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Luncheon</p>
+                <div class="button" onclick="sendKingdom('lunch')">
+                    <img src="~/images/icon12.png" alt="Button 12">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Ruined</p>
+                <div class="button" onclick="sendKingdom('ruined')">
+                    <img src="~/images/icon13.png" alt="Button 13">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Bowser</p>
+                <div class="button" onclick="sendKingdom('bowser')">
+                    <img src="~/images/icon14.png" alt="Button 14">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Moon</p>
+                <div class="button" onclick="sendKingdom('moon')">
+                    <img src="~/images/icon15.png" alt="Button 15">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Dark Side</p>
+                <div class="button" onclick="sendKingdom('dark')">
+                    <img src="~/images/icon16.png" alt="Button 16">
+                </div>
+            </div>
+            <div class="button-container">
+                <p class="button-label">Darker Side</p>
+                <div class="button" onclick="sendKingdom('darker')">
+                    <img src="~/images/icon17.png" alt="Button 17">
                 </div>
             </div>
         </div>
@@ -222,4 +314,13 @@ onclick="window.location.href='ban';">
         </div>
     </div>
 
+<!-- Back Button -->
+        <div class="back-button">
+            <button onclick="window.location.href='index';">Back</button>
+        </div>
+    </div>
 </body>
+</html>
+
+    <script src="~/js/script.js"></script>
+

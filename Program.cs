@@ -10,9 +10,14 @@ namespace SMOOWebController
 			// Add services to the container.
 			builder.Services.AddRazorPages();
 			builder.Services.AddControllers();
-
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy("AllowAllOrigins",
+					policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+			});
 			var app = builder.Build();
-
+			app.UseCors("AllowAllOrigins");
+			app.UseRouting();
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
 			{
@@ -24,7 +29,6 @@ namespace SMOOWebController
 			//app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
-			app.UseRouting();
 
 			app.UseAuthorization();
 			app.MapControllers();

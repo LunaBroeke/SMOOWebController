@@ -1,0 +1,173 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    width: 80%;
+}
+
+/* Top Text */
+.top-text h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* Button Section */
+.button-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button {
+    width: 100px;
+    height: 100px;
+    background-color: #2d2d2d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button img {
+    width: 100%; /* Image will fit the full width of the button */
+    height: 100%; /* Image will fit the full height of the button */
+    object-fit: cover; /* Ensures the image covers the button area */
+    border-radius: 10px; /* Optional: Keeps the same rounded corners as the button */
+}
+
+
+.button:hover {
+    transform: scale(1.1);
+    background-color: #444444;
+}
+
+/* Console Section */
+.console-section {
+    margin-top: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.console-box {
+    width: 100%;
+    height: 150px;
+    background-color: #2d2d2d;
+    border: 1px solid #444444;
+    border-radius: 5px;
+    overflow-y: auto;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.console-box div {
+    margin: 5px 0; /* Space between logs */
+}
+
+
+
+.button-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.button-label {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+.back-button button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.back-button button:hover {
+    background-color: #666;
+}
+
+
+/* Connected Players Section */
+.connected-players-section {
+    margin-top: 20px;
+    text-align: left;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Players and Ban List Sections */
+.players-section, .ban-list-section {
+    margin-top: 20px;
+    text-align: left;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.player-list, .ban-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.player-list li, .ban-list li {
+    font-size: 16px;
+    margin: 5px 0; /* Space between players */
+    color: #dddddd;
+    cursor: pointer; /* Indicate that the list item is clickable */
+}
+
+.player-list li:hover {
+    color: #ff5555; /* Change color on hover for interactivity */
+}
+
+
+

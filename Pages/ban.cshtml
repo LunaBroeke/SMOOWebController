@@ -1,7 +1,6 @@
-﻿@page
-@model IndexModel
+@page
 @{
-    ViewData["Title"] = "Home page";
+
 }
 
 <style>
@@ -179,41 +178,29 @@
 </style>
 
 
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMOO Server</title>
+    <title>Ban Management</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Top Text -->
         <div class="top-text">
-            <h1>SMOO Server V0</h1>
+            <h1>Ban Management</h1>
         </div>
 
-        <!-- Buttons Section -->
-        <div class="button-section">
-            <div class="button-container">
-                <p class="button-label">Mushroom</p>
-                <div class="button">
-                    <img src="~/images/icon1.png" alt="Button 1" />
-                </div>
-            </div>
-            <div class="button-container">
-                <p class="button-label">Ban</p>
-                <div class="button"
-onclick="window.location.href='ban';">
-                    <img src="~/images/ban.png" alt="Button 2" />
-                </div>
-            </div>
-            <div class="button-container">
-                <p class="button-label">Send All</p>
-                <div class="button" onclick="window.location.href='sendall';">
-                    <img src="~/images/sendall.png" alt="Button 3" />
-                </div>
-            </div>
+        <!-- Players Section -->
+        <div class="players-section">
+            <p class="section-title">Connected Players</p>
+            <ul class="player-list" id="playerList">
+            </ul>
         </div>
+
 
         <!-- Console Section -->
         <div class="console-section">
@@ -222,4 +209,10 @@ onclick="window.location.href='ban';">
         </div>
     </div>
 
+<!-- Back Button -->
+        <div class="back-button">
+            <button onclick="window.location.href='index';">Back</button>
+        </div>
+    </div>
 </body>
+</html>
