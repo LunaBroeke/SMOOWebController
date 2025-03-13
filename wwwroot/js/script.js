@@ -154,8 +154,8 @@ function sendKingdom(kingdom) {
             destin = 'Unknown Kingdom'; // Default case if none of the cases match
     }
     var resultString = "";
-    console.log(localAddress + 'api/sendcommand')
-    fetch(localAddress + 'api/sendcommand', {
+    console.log('/api/sendcommand')
+    fetch('/api/sendcommand', {
         method: "POST", // Specify POST method
         headers: {
             "Content-Type": "application/json" // Indicate the body contains JSON
